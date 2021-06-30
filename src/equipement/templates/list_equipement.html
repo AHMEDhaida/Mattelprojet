@@ -1,0 +1,159 @@
+{% extends "base_generic.html" %}
+{% load bootstrap4 %}
+{% load static %}
+
+
+
+{% block content %}
+
+
+ <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card card-shadow mb-4 ">
+                            <div class="card-header border-0">
+                                <div class="custom-title-wrap bar-warning">
+                                    <div class="custom-title">List des Equipement</div>
+                                    <div class=" widget-action-link">
+                                        <div class="row">
+                                        <div class="dropdown" style="margin-right: 15px">
+                                            <a href="#" class="btn btn-transparent text-secondary dropdown-hover p-0" data-toggle="dropdown">
+                                                Filter <i class="fa fa-caret-down pl-2"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right vl-dropdown">
+                                                <form method="get">
+                                                           {%  bootstrap_form filter.form %}
+                                                     <button type="submit"  class="btn btn-purple float-right"  >
+                                                     Recherche
+                                                     </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        </div>
+
+                                    </div>
+
+                            {% if messages %}
+                                {% for message in messages %}
+                                 <div class="alert alert-{{message.tags}}">
+                                    {{message}}
+                                 </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                                {% if request.user.is_superuser %}
+                        <ul type="none" class="object-tools">
+                              <li>
+
+                                <a href="{% url 'equip:ajoute' %} " title="Ajouter Equipement"  class="addlink btn btn-primary p-1">
+                                    Ajout equipement <big>+</big>
+                                </a>
+                              </li>
+                       </ul>
+                                {% endif %}
+                        <div class="card-body- pt-3 pb-4">
+                            <div class="table-responsive">
+                                <table id="data_table" class="table table-bordered table-striped" cellspacing="0">
+
+                                    <thead>
+
+                                    <tr>
+                                        <th>Num serie</th>
+                                        <th>Nom</th>
+                                        <th>Date</th>
+                                        <th>Categorie</th>
+                                         <th>Etat service</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+
+                                    <tr>
+                                        <th>Num serie</th>
+                                        <th>Nom</th>
+                                        <th>Date</th>
+                                        <th>Categorie</th>
+                                         <th>Etat service</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    {% for  list in list_quip  %}
+                                    <tr>
+                                        
+                                        <td>{{ list.num_serie }}</td>
+                                        <td>{{ list.nom }}</td>
+                                        <td>{{ list.date_ajoute|date:'d M o' }}</td>
+                                        <td>{{ list.category}}</td>
+
+                                         <td>
+                                             {% if list.installation_equipement %}
+                                                {{ list.installation_equipement.service}}
+                                            {% else%}
+                                                 Non attribut
+                                            {% endif%}
+
+
+                                        </td>
+                                        <td>
+                                            {% if list.installation_equipement %}
+                                                <center> <button class="btn  btn-success p-1 btn-md">A</button></center>
+                                            {% else%}
+                                                 <center> <button class="btn  btn-danger p-1 btn-md">N</button></center>
+                                            {% endif%}
+                                        </td>
+
+                                         <td>
+
+
+                                              <a class="text-dark btn btn-outline-info p-2" href="{% url 'equip:detail_equipement' list.id %}" title="View equipement"><i class="fa fa-eye" aria-hidden="true"></i></a>
+
+                                               {% if request.user.is_superuser %}
+
+                                              <a class="text-dark btn btn-outline-primary p-2 btn-md" href="{% url 'equip:update_equipement' list.id %}" title="Modifier equipement"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                               {% endif%}
+                                             {% if request.user.is_staff %}
+                                               <a class="btn btn-outline-danger p-2 btn-md " href="{% url 'equip:delete_equipement' list.id %}" title="Supprimer equipement" >  <i class="fa fa-trash-o" aria-hidden="true"></i>  </a>
+                                               {% if list.installation_equipement %}
+
+
+                                             <a class="text-dark btn btn-outline-success p-2 btn-md " title="Modifier installation" href="{% url 'install:update_installation' list.installation_equipement.id %}" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+
+
+                                             <a class="text-dark btn btn-outline-warning p-2 btn-md " href="{% url 'install:update_service' list.installation_equipement.id %}" title="Suivre etat service"><i class="fa fa-bandcamp" aria-hidden="true"></i></a>
+                                              {% endif%}
+
+
+
+                            {% endif%}
+                                         </td>
+                                    </tr>
+                                  {% empty %}
+                                      <tr>
+                                          <td colspan="7">jj</td>
+
+                                    </tr>
+
+                                 {% endfor %}
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    </div>
+                    </div>
+ </div>
+
+
+
+
+
+
+
+
+{% endblock %}

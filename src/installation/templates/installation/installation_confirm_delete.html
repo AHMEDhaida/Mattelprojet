@@ -1,0 +1,51 @@
+
+
+{% extends 'base_generic.html'%}
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<div class="container">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">Desinstaller Un Equipement</h4>
+
+                    <button type="button" class="close" data-dismiss="modal">
+                       <a href="{% url 'install:detail_installation' installation.id %}" >&times;</a>
+                   </button>
+
+
+
+        </div>
+          <div class="modal-body">
+                      <!--    form      -->
+
+    <form method="POST">
+
+        <p class="p-0 d-inline-block "> Voulez vous vraiment desinstaller cette equipement  ? </p>
+        <ul>
+            <li>Nom equipement:  {{installation.equipement_installe.nom}}</li>
+            <li>Numero serie:  {{installation.equipement_installe}}</li>
+            <li>Category: {{installation.equipement_installe.category}}</li>
+            <li>Ip: {{installation.ip}}</li>
+            <li> Adresse mac:  {{installation.mac}}</li>
+             <li> Atribué au direction: {{installation.Nom_direction}}</li>
+        </ul>
+        {% csrf_token %}
+         <div class="modal-footer">
+        <input class="btn btn-danger mt-3 p-2" type="submit" value="Oui">
+        <a class="btn btn-secondary mt-3 back-btn p-2" style="margin-right:330px" href="{% url 'install:detail_installation' installation.id %}">Non</a>
+         </div>
+    </form>
+          </div>
+
+
+      </div>
+    </div>
+<!--  </div>-->
+</div>
+
+{%  endblock  %}
+
+

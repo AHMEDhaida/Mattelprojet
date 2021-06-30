@@ -1,0 +1,173 @@
+{% extends 'base.html'%}
+{% block content %}
+
+{% load crispy_forms_tags %}
+<!--{% load bootstrap4 %}-->
+<div class="content-wrapper">
+
+        <div class="container-fluid">
+
+            <!--page title-->
+            <div class="page-title mb-4 d-flex align-items-center">
+                <div class="mr-auto">
+                    <h4 class="weight500 d-inline-block pr-3 mr-3 border-right">Table Equipement</h4>
+                    <nav aria-label="breadcrumb" class="d-inline-block ">
+                        <ol class="breadcrumb p-0">
+                            <li class="breadcrumb-item"><a href="{% url 'equip:home' %}">Accueil</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'installation:table_installation' %}">TableInstallation</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">TableEquipement</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <!--/page title-->
+
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header border-0">
+
+                            <div class="custom-title-wrap bar-primary">
+
+
+                                <div class="custom-title">Equipement</div>
+                            </div>
+                             <div class=" widget-action-link">
+                                        <div class="row">
+                                        <div class="dropdown" style="margin-right: 15px">
+                                            <a href="#" class="btn btn-transparent text-secondary dropdown-hover p-0" data-toggle="dropdown">
+                                                Filter <i class="fa fa-caret-down pl-2"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right vl-dropdown">
+                                                <form method="get">
+                                                           {%  bootstrap_form filter.form %}
+                                                     <button type="submit"  class="btn btn-purple float-right"  >
+                                                     Recherche
+                                                     </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        </div>
+
+                                    </div>
+
+                            {% if messages %}
+                                {% for message in messages %}
+                                 <div class="alert alert-{{message.tags}}">
+                                    {{message}}
+                                 </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <ul type="none" class="object-tools">
+                              <li>
+
+                                <a href="{% url 'equip:add_equipement' %} " title="Ajouter Equipement"  class="addlink btn btn-primary p-1">
+                                    Add equipement <big>+</big>
+                                </a>
+                              </li>
+                       </ul>
+                        <div class="card-body- pt-3 pb-4">
+                            <div class="table-responsive">
+                                <table id="data_table" class="table table-bordered table-striped" cellspacing="0">
+
+                                    <thead>
+
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Num serie</th>
+                                        <th>Nom</th>
+                                        <th>Date</th>
+                                        <th>Categorie</th>
+                                         <th>Etat service</th>
+                                        <th>Status</th>
+                                         <th>user</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Num serie</th>
+                                        <th>Nom</th>
+                                        <th>Date</th>
+                                        <th>Categorie</th>
+                                         <th>Etat service</th>
+                                        <th>Status</th>
+                                        <th>user</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    {% for  list in list_quip  %}
+                                    <tr>
+                                        <td>{{ list.id }}</td>
+                                        <td>{{ list.num_serie }}</td>
+                                        <td>{{ list.nom }}</td>
+                                        <td>{{ list.date_ajoute|date:'d M o' }}</td>
+                                        <td>{{ list.category}}</td>
+                                         <td>
+                                             {% if list.installation_equipement %}
+                                                {{ list.installation_equipement.service}}
+                                            {% else%}
+                                                 Hors service
+                                            {% endif%}
+
+
+                                        </td>
+                                        <td>
+                                            {% if list.installation_equipement %}
+                                                <center> <button class="btn  btn-success p-1 btn-md">A</button></center>
+                                            {% else%}
+                                                 <center> <button class="btn  btn-danger p-1 btn-md">N</button></center>
+                                            {% endif%}
+                                        </td>
+                                        <td>{{ list.author}}</td>
+                                         <td>
+
+
+                                              <a class="text-dark" href="{% url 'equip:detail_equipement' list.id %}">view</a>|
+                                              <a class="text-dark" href="{% url 'equip:update_equipement' list.id %}">mod</a>|
+                                               <a class="btn btn-danger p-1 btn-md " href="{% url 'equip:delete_equipement' list.id %}" title="Supprimer" >  delete  </a>
+                                               {% if list.installation_equipement %}
+
+                                             <a class="text-dark" href="{% url 'install:update_service' list.installation_equipement.id %}">Suivre etat service</a>|
+                                             <a class="text-dark" href="{% url 'install:update_installation' list.installation_equipement.id %}">mod</a>|
+
+                                            {% endif%}
+<!--                                <div class="text-right">-->
+<!--                                        <div class="dropdown mb-5">-->
+<!--                                            <a href="#" class="btn btn-transparent text-light dropdown-hover p-0" data-toggle="dropdown">-->
+<!--                                                <i class=" vl_ellipsis-fill-h"></i>-->
+<!--                                            </a>-->
+<!--                                            <div class="dropdown-menu dropdown-menu-right vl-dropdown">-->
+<!--                                                <a class="dropdown-item" href="#"> Edit</a>-->
+<!--                                                <a class="dropdown-item" href="#"> Delete</a>-->
+<!--                                                <a class="dropdown-item" href="#"> Settings</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                </div>-->
+
+
+                                         </td>
+                                    </tr>
+                                 {% endfor %}
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+<!--    footer -->
+    {% include 'equipement/include_footer.html' %}
+
+
+    </div>
+
+{% endblock content %}

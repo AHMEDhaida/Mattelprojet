@@ -1,0 +1,77 @@
+{% extends "base_generic.html" %}
+{% load bootstrap %}
+{% block content %}
+<style>
+  .profile-pic{
+    max-width: 200px;
+    max-height:200px;
+    margin: 0 auto;
+    border-radius: 50%;
+  }
+</style>
+
+<br>
+<div class="row">
+  <div class="col-md-3">
+    <div class="card card-body">
+      <a class="btn btn-warning" href="{% url 'accounts:profile'%}"> &#8592; Back to Profile</a>
+      <hr>
+      <h3 style="text-align: center">Account Settings</h3>
+      <hr>
+      <img class="profile-pic" src="{{request.user.profile.image.url}}" >
+    
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="card card-body">
+      
+      <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+           {{ userform|bootstrap }}
+
+          {{ profileform|bootstrap }}
+    
+      <input class="btn btn-purple float-right" type="submit" value="Modifier" name="Update Information">
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}
+
+<!---
+
+<div class="row" style="margin-left: 150px">
+    <div class="col-12 col-lg-6 col-xxl-9 d-flex">
+         <div class="card flex-fill">
+            <div class="card-header">
+
+
+
+
+
+  <form method="post" >
+      <h3>Edit Profile</h3>
+    {% csrf_token %}
+      {{ userform|bootstrap }}
+
+     {{ profileform|bootstrap }}
+    <input type="submit"  class="btn btn-block btn-primary" value="save" />
+  </form>
+
+
+
+
+               </div>
+         </div>
+
+    </div>
+</div>
+
+
+
+
+
+--->

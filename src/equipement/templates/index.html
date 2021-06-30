@@ -1,0 +1,317 @@
+{% extends 'base.html'%}
+{% load mathfilters %}
+
+{% block content %}
+
+  <!--main content wrapper-->
+      <div class="content-wrapper">
+
+        <!--creative states-->
+<!--          creative-state-area-->
+
+        <div class="creative-state-area bg-white">
+            <div class="row">
+                <div class="col-lg-7 col-12">
+                    {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-{{message.tags}}">
+                            {{message}}
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                    <h4 class="creative-state-title">Mattel</h4>
+                </div>
+                <div class="col-lg-5  col-12 text-lg-right">
+                    <div class="row short-states mb-lg-0 mb-4">
+<!--                        <div class="col-6">-->
+<!--                            <span class="pr-2">unique visitors</span>-->
+<!--                            <span id="unique_visitors"></span>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <span class="pr-2">total visitors</span>-->
+<!--                            <span id="total_visitors"></span>-->
+<!--                        </div>-->
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="creative-state-icon bg-danger text-center pull-left">
+                        <i class="vl_clip-board"></i>
+                    </div>
+                    <div class="creative-state-info text-center pull-left">
+                        <h3 class="mt-4">{{list_quip.count}}</h3>
+                        <p class="mb-0">TOTALE EQUIPEMENTS</p>
+
+
+                        <div class="">
+                            <canvas id="state_order_chart" height="80"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="creative-state-icon bg-warning text-center pull-left">
+                          <div class="preview col-sm-6 col-md-4 col-lg-3"><i class="ti-plug"></i></div>
+                    </div>
+                    <div class="creative-state-info text-center pull-left">
+                        <h3 class="mt-4">{{ list_installation.count }}</h3>
+                        <p class="mb-0">totale installations</p>
+                        <div class=" widget-action-link">
+
+                           <small class="text-success weight700" title="pourcentage installation">{{list_installation.count|div:list_quip.count|mul:100}}%
+<!--                               <i class="fa fa-long-arrow-up"></i>-->
+                           </small>
+                        </div>
+                        <div class="">
+                            <canvas id="state_sale_chart" height="80"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="creative-state-icon bg-purple text-center pull-left">
+                          <div class="preview"> <i class="icon-direction"></i>  </div>
+                    </div>
+                    <div class="creative-state-info text-center pull-left">
+                        <h3 class="mt-4">{{ list_direction.count }}</h3>
+                        <p class="mb-0">totale direction</p>
+                        <div class=" widget-action-link">
+<!--                            <small class="text-success weight700">5% <i class="fa fa-long-arrow-up"></i></small>-->
+                        </div>
+                        <div class="">
+                            <canvas id="state_profit_chart" height="80"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+<!--          kkkkkkkkkkk-->
+            <div class="row">
+                    <div class="col-xl-6 col-md-6">
+                        <div class="card card-shadow mb-4">
+                            <div class="card-header border-0">
+                                <div class="custom-title-wrap bar-danger">
+                                    <div class="custom-title">
+                                        Statistique
+                                        <ul class="nav nav-pills nav-pill-primary nav-pill-custom nav-pills-sm float-right " id="pills-tab2" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="pills-today-tab2" data-toggle="pill" href="#pills-weekly2" role="tab" aria-selected="true">Nombre</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="pills-month-tab2" data-toggle="pill" href="#pills-month2" role="tab" aria-selected="false">Pourcentage</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="custom-post-title">Statistique etat du service des equipements</div>
+                                </div>
+                            </div>
+                            <div class="card-body pt-5 pb-4">
+                                <div class="tab-content" id="pills-tabContent2">
+                                    <div class="tab-pane fade show active" id="pills-weekly2" role="tabpanel" aria-labelledby="pills-today-tab">
+                                        <div class="row">
+                                            <div class="col-12 col-xl-7 col-md-6 text-center">
+<!--                                                <canvas id="doughnut_chart" class="mb-4" ></canvas>-->
+<!--                                                <small class="text-muted">Realtime data update instantly</small>-->
+                                            </div>
+                                            <div class="col-12 col-xl-4 col-md-6 text-muted mt-xl-4">
+                                                <ul class="list-unstyled f12">
+                                                    <li class="list-widget-border mb-3 pb-3">
+                                                        <i class="fa fa-circle pr-2" style="color: #cae59b"></i> {{equipement_service.count}}
+                                                        <span class="float-right">En service</span>
+                                                    </li>
+                                                    <li class="list-widget-border mb-3 pb-3">
+                                                        <i class="fa fa-circle pr-2" style="color: #fcdd82"></i> {{equipement_panne.count|add:equipement_service.count|add:equipement_remplace.count|sub:list_quip.count|abs}}
+                                                        <span class="float-right">Hors service</span>
+                                                    </li>
+                                                    <li class="list-widget-border mb-3 pb-3">
+                                                        <i class="fa fa-circle pr-2 " style="color: #f79490"></i> {{equipement_panne.count}}
+                                                        <span class="float-right">En panne</span>
+                                                    </li>
+                                                    <li class="list-widget-border mb-3 pb-3">
+                                                        <i class="fa fa-circle pr-2 " style="color: #acf5fe"></i> {{equipement_remplace.count}}
+                                                        <span class="float-right">A remplace</span>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="pills-month2" role="tabpanel" aria-labelledby="pills-month-tab">
+                                        <div class="row">
+                                            <div class="col-12 col-xl-7 col-md-6 text-center">
+                                                <canvas id="doughnut_chart2" class="mb-4"></canvas>
+                                                <small class="text-muted">Realtime data update instantly</small>
+                                            </div>
+                                            <div class="col-12 col-xl-4 col-md-6 text-muted mt-xl-4">
+                                               <ul class="list-unstyled f12">
+                                                    <li class="list-widget-border mb-3 pb-3">
+                                                        <i class="fa fa-circle pr-2" style="color: #cae59b"></i> {{equipement_service.count|div:list_quip.count|mul:100}}%
+                                                        <span class="float-right">En service</span>
+                                                    </li>
+                                                    <li class="list-widget-border mb-3 pb-3">
+                                                        <i class="fa fa-circle pr-2" style="color: #fcdd82"></i> {{equipement_panne.count|add:equipement_service.count|add:equipement_remplace.count|sub:list_quip.count|abs|div:list_quip.count|mul:100}}%
+                                                        <span class="float-right">Hors service</span>
+                                                    </li>
+                                                    <li class="list-widget-border mb-3 pb-3">
+                                                        <i class="fa fa-circle pr-2 " style="color: #f79490"></i> {{equipement_panne.count|div:list_quip.count|mul:100}}%
+                                                        <span class="float-right">En panne</span>
+                                                    </li>
+                                                    <li class="list-widget-border mb-3 pb-3">
+                                                        <i class="fa fa-circle pr-2 " style="color: #acf5fe"></i> {{equipement_remplace.count|div:list_quip.count|mul:100}}%
+                                                        <span class="float-right">A remplace</span>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-md-6">
+                        <div class="card card-shadow mb-4">
+                            <div class="card-body">
+                                <div class=" widget-action-link">
+                                    <div class="dropdown">
+                                        <a href="#" class="btn btn-transparent text-secondary dropdown-hover p-0" data-toggle="dropdown">
+                                            <i class=" vl_ellipsis-fill-h"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right vl-dropdown">
+                                            <a class="dropdown-item" href="#"> Edit</a>
+                                            <a class="dropdown-item" href="#"> Delete</a>
+                                            <a class="dropdown-item" href="#"> Settings</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <strong>405</strong>
+                                    <span class="text-muted">Following</span>
+                                    <span class="pl-2 pr-2 text-muted weight800">.</span>
+                                    <strong>1690</strong>
+                                    <span class="text-muted">Follower</span>
+                                </div>
+
+                                <div class="text-center">
+                                    <div class="mt-4 mb-3">
+                                        <img class="rounded-circle" src="assets/img/avatar/avatar-large3.jpg" width="85" alt=""/>
+                                    </div>
+                                    <h5 class="text-uppercase mb-0">Jane Doe</h5>
+                                    <p class="text-muted mb-0">Sr. Marketing Executive </p>
+                                    <div class="rattings mb-4">
+                                        <i class="fa fa-star text-warning"></i>
+                                        <i class="fa fa-star text-warning"></i>
+                                        <i class="fa fa-star text-warning"></i>
+                                        <i class="fa fa-star text-warning"></i>
+                                        <i class="fa fa-star-o text-warning"></i>
+                                    </div>
+                                    <div class="badge-icon mb-4">
+                                        <img src="assets/img/badge/level.svg" width="50" alt="Level" data-toggle="tooltip" data-placement="top" title="Level 5"/>
+                                        <img src="assets/img/badge/status.svg" width="50" alt="Status" data-toggle="tooltip" data-placement="top" title="Status"/>
+                                        <img src="assets/img/badge/disable.svg" width="50" alt="Disable" data-toggle="tooltip" data-placement="top" title="Disable"/>
+                                        <img src="assets/img/badge/trendy.svg" width="50" alt="Trendy" data-toggle="tooltip" data-placement="top" title="Trendy"/>
+                                        <img src="assets/img/badge/monthly-top-seller.svg" width="50" alt="Monthly Top Seller" data-toggle="tooltip" data-placement="top" title="Monthly Top Seller"/>
+                                    </div>
+                                    <div class="mb-2">
+                                        <a href="#" class="btn btn-sm btn-pill btn-primary pl-4 pr-4">Follow</a>
+                                        <a href="#" class="btn btn-sm btn-pill btn-purple  pl-4 pr-4">Message</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!--          kkkkkkkkkkkk-->
+               <div class="col-xl-12">
+                <div class="card card-shadow mb-4">
+                    <div class="card-header border-0">
+                        <div class="custom-title-wrap bar-success">
+                            <div class="custom-title">User Statistics</div>
+                            <div class=" widget-action-link">
+                                <div class="dropdown">
+                                    <a href="#" class="btn btn-transparent text-secondary dropdown-hover p-0" data-toggle="dropdown">
+                                        <i class=" vl_ellipsis-fill-h"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right vl-dropdown">
+                                        <a class="dropdown-item" href="#"> Edit</a>
+                                        <a class="dropdown-item" href="#"> Delete</a>
+                                        <a class="dropdown-item" href="#"> Settings</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="water-mark-text">
+                            User Statistics
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-3 col-sm-4">
+                                <span class="text-primary mb-5 d-inline-block"><i class="fa fa-bolt"></i> Page Views</span>
+                                <h1 class="mb-0">135,870</h1>
+                                <small class="text-muted">Page views in last month december 2018</small>
+                                <ul class="list-unstyled mt-5">
+                                    <li class="text-muted">
+                                        <i class="fa fa-clock-o pr-2"></i> Data from January
+                                    </li>
+                                    <li class="text-muted">
+                                        <i class="fa fa-clock-o pr-2"></i>  Last active in 12.01.2018
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-xl-9 col-sm-8">
+                                <div class="row">
+                                    <div class="col-lg-4 col-sm-6">
+                                        <div class="text-center  mb-4">
+                                            <div class="rounded-circle bg-danger sr-icon-box-lg bubble-shadow-md d-inline-block mb-2">
+                                                <i class="vl_user-male"></i>
+                                            </div>
+                                            <div class="d-block">
+                                                <h3 class="text-uppercase mb-0 weight500 text-danger">
+                                                    {{list_quip.count|sub:list_installation.count}}
+                                                </h3>
+                                                <span class="text-muted">Registered User</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-6">
+                                        <div class="text-center mb-4">
+                                            <div class="rounded-circle bg-purple sr-icon-box-lg bubble-shadow-md d-inline-block mb-2">
+                                                <i class="vl_star"></i>
+                                            </div>
+                                            <div class="d-block">
+                                                <h3 class="text-uppercase mb-0 weight500 text-purple">4.6</h3>
+                                                <span class="text-muted">Start Ratting</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-6">
+                                        <div class="text-center  mb-4">
+                                            <div class="rounded-circle bg-warning sr-icon-box-lg bubble-shadow-md d-inline-block mb-2">
+                                                <i class=" vl_chat-bubble"></i>
+                                            </div>
+                                            <div class="d-block">
+                                                <h3 class="text-uppercase mb-0 weight500 text-warning">10M</h3>
+                                                <span class="text-muted">Monthly Message</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!--/creative states-->
+
+
+
+        <!--footer-->
+      {% include 'equipement/include_footer.html' %}
+        <!--/footer-->
+    </div>
+
+
+
+{% endblock content %}

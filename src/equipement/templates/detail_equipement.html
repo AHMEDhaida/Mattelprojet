@@ -1,0 +1,172 @@
+{% extends 'base_generic.html'%}
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+
+
+    <div class="content-wrapper">
+
+        <div class="container-fluid">
+
+
+
+            <div class="row">
+                <div class="col-xl-9">
+                    <div class="card card-shadow mb-2">
+                        <div class="card-header border-0">
+                                     {% if messages %}
+                                     {% for message in messages %}
+                                         <div class="alert alert-{{message.tags}}">
+                                            {{message}}
+                                         </div>
+                                     {% endfor %}
+                                   {% endif %}
+                            <div class="custom-title-wrap bar-primary">
+                                <div class="custom-title">
+                                     {% if inst %}
+                                             <button class="btn  btn-success p-1 btn-md"></button>
+                                                ViewEquipement<br>
+                                    Etat service: {{equipement_installe.installation_equipement.service}}
+                                    {% else %}
+                                             <button class="btn btn-danger p-1 btn-md"></button>
+                                            ViewEquipement<br>
+                                    Etat service: Hors service
+                                    {% endif %}
+                                 </div>
+                            </div>
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                       <ul>
+                                             <li> Nom: {{equipement_installe.nom}}  </li>
+                                              <li> Numero Serie: {{equipement_installe.num_serie}}  </li>
+                                             <li>Ajouter par: {{equipement_installe.author}}  </li>
+                                             <li> Date ajouter: {{equipement_installe.date_ajoute|date:'d M o' }}   </li>
+
+                                             <li> Categorie: {{equipement_installe.category}}   </li>
+
+                                       </ul>
+                         {% if inst %}
+                                    {% if request.user.is_superuser %}
+
+                                            <ul type="none" class="modal-footer">
+                                              <li>
+
+                                                <a href="{% url 'installation:delete_installation' equipement_installe.installation_equipement.id %}"
+                                                  title="Desinstaller un equipement" class="addlink btn btn-danger p-2 mt-5">
+                                                   Desinstaller
+                                                </a>
+                                              </li>
+                                     {% endif %}
+
+
+                                                <a href="{% url 'equip:listE' %}"
+                                                  title="Desinstaller un equipement" class="addlink btn btn-secondary p-2 mt-5">
+                                                   Retoure
+                                                </a>
+                                              </li>
+                                             </ul>
+
+
+                         {% else %}
+
+<!--                                                  <button type="button" class="btn btn-primary mt-4 p-2" data-toggle="modal" data-target="#exampleModal">-->
+<!--                                                    Installer-->
+<!--                                                  </button>-->
+
+
+                                      <ul type="none" class="object-tools">
+                                          {% if request.user.is_superuser %}
+                                              <li>
+                                             <button type="button" class="btn btn-primary mt-4 p-2" data-toggle="modal" data-target="#exampleModal">
+                                                    Installer
+                                                  </button>
+                                              </li>
+                                          {% endif %}
+                                          <a href="{% url 'equip:listE' %}"
+                                                  title="Desinstaller un equipement" class="addlink btn btn-secondary p-2 mt-5">
+                                                   Retoure
+                                                </a>
+                                      </ul>
+
+
+                         {% endif %}
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Detail De L'installation</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <form method="POST">
+                                                                {% csrf_token %}
+                                                                {{installation_form|crispy}}
+
+                                                </div>
+                                                <div class="modal-footer">
+
+
+                                                    <input class="btn btn-primary p-2" type="submit" value="Installer">
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    {% if inst %}
+                                    <div class="col-md-4 mb-6">
+                          <ul>
+                              {% if request.user.is_superuser %}
+
+                                      <li> Ip: {{equipement_installe.installation_equipement.ip}} </li>
+                                      <li>Adesse mac: {{equipement_installe.installation_equipement.mac}}   </li>
+                                      <li>  Installer par: {{equipement_installe.installation_equipement.author}}</li>
+                              {% endif %}
+                                      <li>  Atribué au direction: {{equipement_installe.installation_equipement.Nom_direction}}</li>
+                                        <li>  Date d'installation: {{equipement_installe.installation_equipement.date_installe|date:'d M o'}}</li>
+
+                          </ul>
+
+                                    <!-- Modal -->
+
+
+                                </div>
+                    {% endif %}
+
+
+
+
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <!--footer-->
+
+
+        <!--/footer-->
+    </div>
+    <!--/main content wrapper-->
+    </div>
+
+
+{% endblock  %}
+
+<!--        -->
+

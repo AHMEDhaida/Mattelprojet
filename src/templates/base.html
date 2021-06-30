@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+
+{% load static %}
+{% load mathfilters %}
+<html lang="en">
+
+<!-- Mirrored from thevectorlab.net/dashlab-v1.3/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Feb 2019 05:37:41 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+
+    <!--favicon icon-->
+    
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.html' %}">
+
+    <title>GESTION  EQUIPEMENT MATTEL</title>
+    
+    
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+
+    <!--bootstrap styles-->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+     <!--icon font-->
+    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/dashlab-icon/dashlab-icon.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/simple-line-icons/css/simple-line-icons.css' %}"  rel="stylesheet">
+    <link href="{% static 'vendor/themify-icons/css/themify-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/weather-icons/css/weather-icons.min.css' %}" rel="stylesheet">
+
+    <!--custom scrollbar-->
+    <link href="{% static 'vendor/m-custom-scrollbar/jquery.mCustomScrollbar.css' %}" rel="stylesheet">
+
+    <!--jquery dropdown-->
+    <link href="{% static 'vendor/jquery-dropdown-master/jquery.dropdown.css' %}" rel="stylesheet">
+
+    <!--jquery ui-->
+    <link href="{% static 'vendor/jquery-ui/jquery-ui.min.css' %}" rel="stylesheet">
+
+    <!--iCheck-->
+    <link href="{% static 'vendor/icheck/skins/all.css' %}" rel="stylesheet">
+
+    <!--vector maps -->
+    <link href="{% static 'vendor/vector-map/jquery-jvectormap-1.1.1.css' %}" rel="stylesheet" >
+
+    <!--c3chart-->
+    <link href="{% static 'vendor/c3chart/c3.min.css' %}" rel="stylesheet">
+
+        <!--data table-->
+    <link href="{% static 'vendor/data-tables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+
+    <!--custom styles-->
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+
+</head>
+<body class="fixed-nav top-nav">
+
+    <!--header-->
+   <nav class="navbar navbar-expand-lg fixed-top navbar-light" id="mainNav">
+        <div class="box-container">
+          
+                
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+
+                <!--brand name-->
+                <a class="navbar-brand navbar-hide-responsive" href="#">
+                    <img class="pr-3 float-left" src="{% static 'img/logo-icon.png' %}" srcset="{% static 'img/logo-icon.png' %}"  alt=""/>
+                    <div class="float-left">
+                        <div>Mattel</div>
+
+                    </div>
+                </a>
+                <!--/brand name-->
+
+                <!--header rightside links-->
+                <ul class="navbar-nav header-links ml-auto hide-arrow">
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle mr-lg-3" id="userNav" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="user-thumb">
+                                <img class="rounded-circle" src="{{request.user.profile.image.url}}" alt=""/>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userNav">
+                            <a class="dropdown-item" href="{% url 'accounts:profile'%}">My Profile</a>
+                            <a class="dropdown-item" href="{% url 'accounts:profile_edit'%}">Account Settings</a>
+                            <a class="dropdown-item" href="{% url 'accounts:change_password' %}">Modifier le mot de passe</a>
+
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'accounts:logout'%}">Déconnexion</a>
+                        </div>
+                    </li>
+                   <li class="nav-item">
+                        <a href="javascript:;" class="nav-link right_side_toggle">
+                            <i class="icon-options-vertical"> </i>
+                        </a>
+                    </li>
+                </ul>
+                <!--/header rightside links-->
+            </div>
+        </div>
+    </nav>
+
+
+    <!--main content wrapper-->
+    <div   class="content-wrapper">
+        <!--creative states-->
+        <div class="creative-state-area bg-white">
+            <div class="box-container">
+                {% if list_quip.count|sub:list_I.count < 5 %}
+                    <p class="text-danger">Veillez vous informer il reste seulment {{ list_quip.count|sub:list_I.count }} equipement(s)</p>
+                                        {% endif%}
+
+                <div class="row pt-xl-4">
+                     {% if request.user.is_staff %}
+
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="creative-state-icon bg-danger text-center pull-left mt-4">
+                            <i class="vl_clip-board"></i>
+                        </div>
+                        <div class="creative-state-info text-center pull-left state-shadow">
+                            <a href="{% url 'equip:listE'%}">
+                            <h3 class="mt-4">{{Num_E}}</h3>
+                        <p class="mb-0">total equipements</p>
+                                </a>
+                            <div class=" widget-action-link ">
+                                <small class="text-danger weight700"></small>
+                            </div>
+
+                            <div class="px-3 pb-3">
+                                <canvas  height="80"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="creative-state-icon bg-warning text-center pull-left mt-4">
+                            <i class="vl_Download-circle"></i>
+                        </div>
+                        <div class="creative-state-info text-center pull-left state-shadow">
+                             <a href="{% url 'install:table_installation'%}">
+                            <h3 class="mt-4">{{Num_I}}</h3>
+                            <p class="mb-1">Equipements installés </p>
+                                </a>
+                            <div class=" widget-action-link">
+                                <small class="text-success weight700"></small>
+                            </div>
+                            <div class="px-3 pb-3">
+                                <canvas  height="80"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="creative-state-icon bg-purple text-center pull-left mt-4">
+                            <i class="vl_screen"></i>
+                        </div>
+                        <div class="creative-state-info text-center pull-left state-shadow">
+                            <a href="{% url 'equip:category_table'%}">
+                            <h3 class="mt-4">{{Num_D}}</h3>
+
+                            <p class="mb-1"> Directions</p>
+                            </a>
+                            <div class=" widget-action-link">
+                                <small class="text-success weight700"></small>
+                            </div>
+                            <div class="px-3 pb-3">
+                                <canvas  height="80"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="creative-state-icon bg-danger text-center pull-left mt-4" >
+                            <i class="vl_user-male"></i>
+                        </div>
+                        <div class="creative-state-info text-center pull-left state-shadow">
+                             <a href="{% url 'equip:listU'%}">
+                            <h3 class="mt-4">{{Num_U}}</h3>
+
+                            <p class="mb-1"> Utilisateurs</p>
+                            </a>
+                            <div class=" widget-action-link">
+                                <small class="text-success weight700"></small>
+                            </div>
+                            <div class="px-3 pb-3">
+                                <canvas  height="80"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                     {% else %}
+
+                      <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="creative-state-icon bg-danger text-center pull-left mt-4">
+                            <i class="vl_clip-board"></i>
+                        </div>
+                        <div class="creative-state-info text-center pull-left state-shadow">
+                            <a href="{% url 'equip:listE'%}">
+                            <h3 class="mt-4">{{Num_E}}</h3>
+                        <p class="mb-0">total equipements</p>
+                                </a>
+                            <div class=" widget-action-link ">
+                                <small class="text-danger weight700"></small>
+                            </div>
+
+                            <div class="px-3 pb-3">
+                                <canvas  height="80"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="creative-state-icon bg-warning text-center pull-left mt-4">
+                            <i class="vl_Download-circle"></i>
+                        </div>
+                        <div class="creative-state-info text-center pull-left state-shadow">
+
+                            <h3 class="mt-4">{{Num_I}}</h3>
+                            <p class="mb-1">Equipements installés </p>
+
+                            <div class=" widget-action-link">
+                                <small class="text-success weight700"></small>
+                            </div>
+                            <div class="px-3 pb-3">
+                                <canvas  height="80"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="creative-state-icon bg-purple text-center pull-left mt-4">
+                            <i class="vl_screen"></i>
+                        </div>
+                        <div class="creative-state-info text-center pull-left state-shadow">
+
+                            <h3 class="mt-4">{{Num_D}}</h3>
+
+                            <p class="mb-1"> Directions</p>
+
+                            <div class=" widget-action-link">
+                                <small class="text-success weight700"></small>
+                            </div>
+                            <div class="px-3 pb-3">
+                                <canvas  height="80"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="creative-state-icon bg-danger text-center pull-left mt-4" >
+                            <i class="vl_user-male"></i>
+                        </div>
+                        <div class="creative-state-info text-center pull-left state-shadow">
+
+                            <h3 class="mt-4">{{Num_U}}</h3>
+
+                            <p class="mb-1"> Utilisateurs</p>
+
+                            <div class=" widget-action-link">
+                                <small class="text-success weight700"></small>
+                            </div>
+                            <div class="px-3 pb-3">
+                                <canvas  height="80"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                       {% endif %}
+
+                </div>
+            </div>
+        </div>
+        <!--/creative states-->
+        <div  class="box-container">
+            <div class="container-fluid">
+
+        <!--Statistique-->
+            <div class="row">
+                    <div class="col-xl-6 col-md-6">
+                        <div class="card card-shadow mb-4">
+                            <div class="card-header border-0">
+                                <div class="custom-title-wrap bar-danger">
+                                    <div class="custom-title">
+                                        Statistique
+                                        <ul class="nav nav-pills nav-pill-primary nav-pill-custom nav-pills-sm float-right " id="pills-tab2" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="pills-today-tab2" data-toggle="pill" href="#pills-weekly2" role="tab" aria-selected="true">Nombre</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="pills-month-tab2" data-toggle="pill" href="#pills-month2" role="tab" aria-selected="false">Pourcentage</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="custom-post-title">Statistique etat du service des equipements</div>
+                                </div>
+                            </div>
+                            <div class="card-body pt-5 pb-4">
+                                <div class="tab-content" id="pills-tabContent2">
+                                    <div class="tab-pane fade show active" id="pills-weekly2" role="tabpanel" aria-labelledby="pills-today-tab">
+                                        <div class="row">
+<!--                                            <div class="col-12 col-xl-7 col-md-6 text-center">-->
+<!--                                               <canvas id="doughnut_chart" class="mb-4" ></canvas>-->
+                                               <div id="container" style="width: 65%;">
+                                                       <canvas id="pie-chart"></canvas>
+                                                </div>
+<!--                                            </div>-->
+                                            <div class="col-12 col-xl-4 col-md-6 text-muted mt-xl-4">
+                                                <ul class="list-unstyled f12">
+                                                    <li class="list-widget-border mb-3 pb-3">
+                                                        <i class="fa fa-circle pr-2" style="color: #cae59b"></i> {{equipement_service.count}}
+                                                        <span class="float-right">En service</span>
+
+                                                    </li>
+                                                    <li class="list-widget-border mb-3 pb-3">
+                                                        <i class="fa fa-circle pr-2" style="color: #fcdd82"></i> {{equipement_panne.count|add:equipement_service.count|sub:list_quip.count|abs}}
+                                                        <span class="float-right">Hors service</span>
+                                                    </li>
+                                                    <li class="list-widget-border mb-3 pb-3">
+                                                        <i class="fa fa-circle pr-2 " style="color: #f79490"></i> {{equipement_panne.count}}
+                                                        <span class="float-right">En panne</span>
+                                                    </li>
+
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="pills-month2" role="tabpanel" aria-labelledby="pills-month-tab">
+                                        <div class="row">
+<!--                                            <div class="col-12 col-xl-7 col-md-6 text-center">-->
+<!--                                                <canvas id="doughnut_chart2" class="mb-4"></canvas>-->
+                                                <div id="container2" style="width: 65%;">
+                                                       <canvas id="pie-chart2"></canvas>
+                                                </div>
+
+<!--                                            </div>-->
+                                            <div class="col-12 col-xl-4 col-md-6 text-muted mt-xl-4">
+                                               <ul class="list-unstyled f12">
+                                                    <li class="list-widget-border mb-3 pb-3">
+                                                               {% if list_quip.count == 0 %}
+
+
+                                                              {% else %}
+                                                        <i class="fa fa-circle pr-2" style="color: #cae59b"></i> {{equipement_service.count|div:list_quip.count|mul:100|floatformat:2}}%
+                                                        <span class="float-right">En service</span>
+                                                            {% endif %}
+                                                    </li>
+                                                    <li class="list-widget-border mb-3 pb-3">
+                                                            {% if list_quip.count == 0 %}
+
+
+                                                            {% else %}
+                                                        <i class="fa fa-circle pr-2" style="color: #fcdd82"></i> {{equipement_panne.count|add:equipement_service.count|sub:list_quip.count|abs|div:list_quip.count|mul:100|floatformat:2}}%
+                                                        <span class="float-right">Hors service</span>
+                                                        {% endif %}
+                                                    </li>
+                                                    <li class="list-widget-border mb-3 pb-3">
+                                                               {% if list_quip.count == 0 %}
+
+
+                                                              {% else %}
+                                                        <i class="fa fa-circle pr-2 " style="color: #f79490"></i> {{equipement_panne.count|div:list_quip.count|mul:100|floatformat:2}}%
+                                                        <span class="float-right">En panne</span>
+                                                            {% endif %}
+                                                    </li>
+
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--member performance & support ticket-->
+
+                <div class="col-xl-6">
+                    <div class="card card-shadow mb-4 ">
+                        <div class="card-header border-0">
+                            <div class="custom-title-wrap bar-danger">
+                                <div class="custom-title">
+                                    Statistique Direction
+                                    <a href="javascript:;" class="btn-ordering btn-primary float-right ml-2">
+                                        <i class="fa fa-sort-alpha-asc"></i>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="pills-today" role="tabpanel" aria-labelledby="pills-today-tab">
+                                    <ul class="list-unstyled mb-0 list-widget">
+                                         {% for n in object_D %}
+                                        <li>
+                                            <div class="media mb-4">
+
+                                                <div class="media-body list-widget-border">
+                                                    <div class="float-left">
+                                                        <h6 class="text-uppercase mb-0">{{n.Nom}}</h6>
+                                                        <span>Nombres des equipements installés par direction</span>
+                                                    </div>
+                                                    <div class=" float-right">
+                                                        <strong>{{n.nomD.count}} <i class="fa fa-level-up text-success pl-2"></i></strong>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </li>
+                                        {% endfor %}
+                                        
+                                    </ul>
+                                      {%if object_D.has_other_pages%}
+
+                                              <div class="container" >
+                                                  <ul class="pagination" style="margin-left: 200px">
+                                                    {%if object_D.has_previous%}
+                                                      <li class="page-item"><a class="page-link" href="?page={{object_E.previous_page_number}}"><i class="ti-angle-left"></i></a></li>
+                                                    {%endif%}
+
+                                                    {%for i in object_D.paginator.page_range %}
+                                                       <li class="page-item"><a class="page-link"href="?page={{i}}"><span>{{i}}</span></a></li>
+                                                     {%endfor%}
+                                                    {%if object_D.has_next%}
+                                                      <li class="page-item"><a class="page-link" href="?page={{object_E.next_page_number}}"><i class="ti-angle-right"></i></a></li>
+                                                    {%endif%}
+                                                  </ul>
+                                              </div>
+
+                                    {%endif%}
+                                   
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            <!--/member performance & support ticket-->
+                    </div>
+            </div>
+    </div>
+    </div>
+
+ <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  <script>
+
+    var config = {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: [{{equipement_service.count}},{{equipement_panne.count}},{{equipement_panne.count|add:equipement_service.count|sub:list_quip.count|abs}}],
+          backgroundColor: [
+                "#cae59b",
+                "#f79490",
+                "#fcdd82",
+          ],
+          label: 'Population'
+        }],
+<!--        labels: {{ labels|safe }}-->
+      },
+      options: {
+        responsive: true
+      }
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('pie-chart').getContext('2d');
+      var ctx2 = document.getElementById('pie-chart2').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+      window.myPie = new Chart(ctx2, config);
+    };
+
+  </script>
+
+</body>
+    <!--/main content wrapper-->
+
+    <!--footer-->
+    <footer class="sticky-footer">
+        <div class="container">
+            <div class="text-center">
+                <small>Copyright &copy; VectorLab {% now 'Y' %}</small>
+            </div>
+        </div>
+    </footer>
+    <!--/footer-->
+
+
+     <!--right sidebar-->
+    <div class="right-sidebar" id="right_side_bar">
+        <div class="card border-0">
+            <div class="card-body pb-0">
+                <!--close toggle-->
+                <a href="javascript:;" class="right_side_toggle float-right close-sidebar-icon">
+                    <i class=" ti-shift-right"> </i>
+                </a>
+                <!--/close toggle-->
+            </div>
+            <div class="card-body pt-2">
+
+                <div class="right-widget">
+                    <div class="custom-title-wrap bar-primary mb-4">
+                        <div class="custom-title">Statistique</div>
+                    </div>
+
+                    <ul class="list-unstyled base-timeline">
+                        <li class="time-dot-primary">
+                            <div class="base-timeline-info">
+                                <a href="{% url 'equipement:home' %}">{{Num_E}}</a> Totale equipements
+
+                            </div>
+                        </li>
+                        <li class="time-dot-danger">
+                            <div class="base-timeline-info">
+                                <a href="{% url 'installation:table_installation' %}" class="text-danger">{{ Num_I }}/{{ Num_E }} </a> Equipements installé
+                            </div>
+
+                        </li>
+                        <li class="time-dot-purple">
+                            <div class="base-timeline-info">
+                                 <a href="#" class="text-purple">{{ Num_D }}</a>  Directions
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                 <div class="right-widget">
+                    <div class="custom-title-wrap bar-danger mb-4">
+                        <div class="custom-title">Utilisateur Connecter</div>
+                    </div>
+
+                    <ul class="list-unstyled mb-0 list-widget">
+                        {% for n in user%}
+                        <li class="cursor">
+                            {% if n.is_active %}
+                            <div class="media mb-4">
+                                    <div class="st-alphabet mr-3">
+                                       <img class="rounded-circle" src= "{{request.user.profile.image.url}}" alt="{{n.username}}"/>
+                                    <span class="status bg-success"></span>
+                                </div>
+
+                                <div class="media-body ">
+                                    <div class="float-left">
+                                        <h6 class="text-uppercase mb-0"> {{n.username}}</h6>
+                                        <span class="text-muted">En Ligne</span>
+                                    </div>
+                                </div>
+                            </div>
+                              {% endif %}
+
+                            {% endfor %}
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--basic scripts-->
+    <script src="{% static 'vendor/jquery/jquery.min.js'%}"></script>
+    <script src="{% static 'vendor/jquery-ui/jquery-ui.min.js'%}"></script>
+    <script src="{% static 'vendor/popper.min.js'%}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js'%}"></script>
+
+    <script src="{% static 'vendor/jquery-dropdown-master/jquery.dropdown.js'%}"></script>
+
+    <script src="{% static 'vendor/m-custom-scrollbar/jquery.mCustomScrollbar.concat.min.js'%}"></script>
+
+    <!--sparkline-->
+    <script src="{% static 'vendor/sparkline/jquery.sparkline.js'%}"></script>
+    <!--sparkline initialization-->
+    <script src="{% static 'vendor/js-init/sparkline/init-sparkline.js'%}"></script>
+
+    <!--c3chart-->
+    <script src="{% static 'vendor/c3chart/d3.min.js'%}"></script>
+    <script src="{% static 'vendor/c3chart/c3.min.js'%}"></script>
+    <!--c3chart initialization-->
+    <script src="{% static 'vendor/js-init/c3chart/init-c3chart.js'%}"></script>
+
+    <!--chartjs-->
+    <script src="{% static 'vendor/chartjs/Chart.bundle.min.js'%}"></script>
+    <!--chartjs initialization-->
+<!--    <script src="{% static 'vendor/js-init/chartjs/init-creative-state-chart.js'%}"></script>-->
+<!--    <script src="{% static 'vendor/js-init/chartjs/init-area-chart.js'%}"></script>-->
+<!--    <script src="{% static 'vendor/js-init/chartjs/init-line-chart.js'%}"></script>-->
+    <script src="{% static 'vendor/js-init/chartjs/init-doughnut-chart.js'%}"></script>
+    <script src="{% static 'vendor/js-init/chartjs/init-doughnut-chart2.js'%}"></script>
+<!--    <script src="{% static 'vendor/js-init/chartjs/init-sales-report-chart.js'%}"></script>-->
+<!--    <script src="{% static 'vendor/js-init/chartjs/init-bubble-chart.js'%}"></script>-->
+
+    <!--flot chart-->
+    <script src="{% static 'vendor/flot/jquery.flot.min.js'%}"></script>
+    <script src="{% static 'vendor/flot/jquery.flot.pie.min.js'%}"></script>
+    <script src="{% static 'vendor/flot/jquery.flot.tooltip.min.js'%}"></script>
+    <!--flot chart initialization-->
+    <script src="{% static 'vendor/js-init/flot/init-flot-widget.js'%}"></script>
+
+    <!--vectormap-->
+    <script src="{% static 'vendor/vector-map/jquery-jvectormap-1.2.2.min.js'%}"></script>
+    <script src="{% static 'vendor/vector-map/jquery-jvectormap-world-mill-en.js'%}"></script>
+    <!--vectormap initialization-->
+    <script src="{% static 'vendor/js-init/vmap/init-vmap-world.js'%}"></script>
+
+    <!--[if lt IE 9]>
+    <script src="{% static 'vendor/modernizr.js'%}"></script>
+    <![endif]-->
+
+    <!--datatables-->
+   <script src="{% static 'vendor/data-tables/jquery.dataTables.min.js'%}"></script>
+   <script src="{% static 'vendor/data-tables/dataTables.bootstrap4.min.js'%}"></script>
+   <!--init datatable-->
+    <script src="{% static 'vendor/js-init/init-datatable.js'%}"></script>
+    <!--basic scripts initialization-->
+    <script src="{% static 'js/scripts.js'%}"></script>
+
+
+
+</html>

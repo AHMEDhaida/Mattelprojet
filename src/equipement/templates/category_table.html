@@ -1,0 +1,114 @@
+{% extends "base_generic.html" %}
+{% load bootstrap4 %}
+{% load static %}
+
+
+
+{% block content %}
+
+<div class="row">
+
+                <div class="col-xl-6 col-md-6">
+                    <div class="card card-shadow mb-4">
+                        <a href=""  >
+
+                        <div class="card-header border-0">
+                            <div class="custom-title-wrap bar-primary">
+                                <div class="custom-title">Categorie D'equipement</div>
+                            </div>
+                        </div>
+                            {% if request.user.is_staff %}
+                        <ul type="none" class="object-tools">
+                              <li>
+
+                                <a href="{% url 'equip:add_categorie'%}" title="Ajouter Categorie D'equipement" class="addlink btn btn-primary p-1">
+                                    Ajout categorie  <big>+</big>
+                                </a>
+                              </li>
+                       </ul>
+                            {% endif %}
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Action</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for list in list_cat %}
+                                <tr>
+                                    <th scope="row">{{ list.id }}</th>
+                                    <td>{{ list.name}}</td>
+                                    {% if request.user.is_staff %}
+                                    <td>  <a class="text-dark" href="{% url 'equip:update_categorie' list.id%}"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
+                                     {% endif %}
+                                </tr>
+
+
+
+                                {% endfor%}
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+<!--                deuxieme table-->
+
+                <div class="col-xl-6 col-md-6">
+
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header border-0">
+                            <div class="custom-title-wrap bar-warning">
+                                <div class="custom-title">Direction</div>
+                            </div>
+                        </div>
+                        {% if request.user.is_staff %}
+                        <ul type="none" class="object-tools">
+                              <li>
+
+                                <a href="{% url 'equip:add_direction'%}"  title="Ajouter Adresse D'une Direction" class="addlink btn btn-primary p-1">
+                                    Ajout direction  <big>+</big>
+                                </a>
+                              </li>
+                       </ul>
+                       {% endif%}
+                        <div class="card-body">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                     <th scope="col">name</th>
+
+                                    <th scope="col">Action</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for list in list_direction %}
+                                        <tr>
+                                            <th scope="row">{{ list.id }}</th>
+                                               <td>{{ list.Nom }}</td>
+                                            {% if request.user.is_staff %}
+                                            <td><a class="text-dark"href="{% url 'equip:update_direction' list.id %}"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
+                                             {% endif%}
+
+                                        </tr>
+                                 {% endfor %}
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+{% endblock %}

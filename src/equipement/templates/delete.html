@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block content %}
+
+<br>
+<div class="row">
+	<div class="col-md-6">
+		<div class="card card-body">
+
+
+			<p>Etes-vous sûr que vous voulez supprimer "{{item}}"?</p>
+
+			<form action="{% url 'equipement:delete' item.id  %}" method="POST">
+				
+				{% csrf_token %}
+				<a class="btn btn-warning" href="{% url 'equipement:home' %}">Annuler</a>
+
+				<input class="btn btn-danger" type="submit" value="supprimer"  name="Confirm">
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

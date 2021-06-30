@@ -1,0 +1,35 @@
+{% extends 'base_generic.html'%}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<<div class="col-xl-6" style="margin-left: 180px">
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header border-0">
+                            <div class="custom-title-wrap bar-primary">
+                                <div class="custom-title">Ajouter direction</div>
+                            </div>
+                        </div>
+                      <div class="card-body">
+                        {% if messages %}
+                 {% for message in messages %}
+                     <div class="alert alert-{{message.tags}}">
+                        {{message}}
+                     </div>
+                 {% endfor %}
+               {% endif %}
+      <form method="POST" >
+           {% csrf_token %}
+           {{form|crispy}}
+
+
+
+    <input type="submit"  class="btn btn-purple float-right" value="
+Enregistrer" />
+
+  </form>
+
+
+
+
+</div>
+{% endblock %}

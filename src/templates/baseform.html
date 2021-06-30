@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+
+<!-- Mirrored from thevectorlab.net/dashlab-v1.3/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Feb 2019 05:37:41 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+
+    <!--favicon icon-->
+
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.html' %}">
+
+    <title>GESTION  EQUIPEMENT MATTEL</title>
+
+
+
+    <!--web fonts-->
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+
+    <!--bootstrap styles-->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!--icon font-->
+    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/dashlab-icon/dashlab-icon.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/simple-line-icons/css/simple-line-icons.css' %}"  rel="stylesheet">
+    <link href="{% static 'vendor/themify-icons/css/themify-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/weather-icons/css/weather-icons.min.css' %}" rel="stylesheet">
+
+    <!--custom scrollbar-->
+    <link href="{% static 'vendor/m-custom-scrollbar/jquery.mCustomScrollbar.css' %}"  rel="stylesheet">
+
+    <!--jquery dropdown-->
+    <link href="{% static 'vendor/jquery-dropdown-master/jquery.dropdown.css' %}"  rel="stylesheet">
+
+    <!--jquery ui-->
+    <link href="{% static 'vendor/jquery-ui/jquery-ui.min.css' %}"  rel="stylesheet">
+
+    <!--iCheck-->
+    <link href="{% static 'vendor/icheck/skins/all.css' %}"  rel="stylesheet">
+
+    <!--vector maps -->
+    <link href="{% static 'vendor/vector-map/jquery-jvectormap-1.1.1.css' %}"  rel="stylesheet" >
+
+    <!--c3chart-->
+    <link href="{% static 'vendor/c3chart/c3.min.css' %}"  rel="stylesheet">
+
+    <!--custom styles-->
+    <link href="{% static 'css/main.css' %}"  rel="stylesheet">
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="{% static 'vendor/html5shiv.js' %}" ></script>
+    <script src="{% static 'vendor/respond.min.js' %}" ></script>
+    <![endif]-->
+
+
+</head>
+<body class="fixed-nav top-nav">
+
+    <!--header-->
+   <nav class="navbar navbar-expand-lg fixed-top navbar-light" id="mainNav">
+        <div class="box-container">
+
+
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+
+                <!--brand name-->
+                <a class="navbar-brand navbar-hide-responsive" href="#">
+                    <img class="pr-3 float-left" src="{% static 'img/logo-icon.png' %}" srcset="{% static 'img/logo-icon.png' %}"  alt=""/>
+                    <div class="float-left">
+                        <div>MATTEL</div>
+{#                        <span class="page-direction f12 weight300">#}
+{##}
+{#                            <span>home</span>#}
+{#                            <!--#}
+{#                            <i class="fa fa-angle-right"></i>#}
+{#                            <span>UI element</span>#}
+{#                            --->#}
+{#                        </span>#}
+                    </div>
+                </a>
+                <!--/brand name-->
+
+                <!--header rightside links-->
+                <ul class="navbar-nav header-links ml-auto hide-arrow">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle mr-lg-3" id="messagesDropdown" href="#" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="vl_chat-bubble"></i>
+                            <span class="d-lg-none">Messages
+                                <span class="badge badge-pill badge-primary">9 New</span>
+                            </span>
+                            <div class="notification-alarm">
+                                <span class="wave wave-danger"></span>
+                                <span class="dot"></span>
+                            </div>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right header-right-dropdown-width pb-0" aria-labelledby="messagesDropdown">
+                            <h6 class="dropdown-header weight500 ">Messages</h6>
+                            <div class="dropdown-divider mb-0"></div>
+                            <a class="dropdown-item border-bottom msg-unread" href="#">
+                                <div class="float-left notificaton-thumb">
+                                    <img class="rounded-circle" src="assets/img/avatar/avatar4.jpg" alt=""/>
+                                </div>
+                                <span class="weight500">Andrew Flinton</span>
+                                <span class="small float-right text-muted">08:30 AM</span>
+
+                                <div class="dropdown-message">
+                                    I hope that you will be there in time. See you then
+                                </div>
+                            </a>
+
+                            <a class="dropdown-item border-bottom msg-unread" href="#">
+                                <div class="float-left notificaton-thumb">
+                                    <img class="rounded-circle" src="assets/img/avatar/avatar2.jpg" alt=""/>
+                                </div>
+                                <span class="weight500">John Doe</span>
+                                <span class="small float-right text-muted">10:28 AM</span>
+
+                                <div class="dropdown-message">
+                                    Hello this is an example message. Just want to show how it looks
+                                </div>
+                            </a>
+
+                            <a class="dropdown-item border-bottom" href="#">
+                                <div class="float-left notificaton-thumb">
+                                    <img class="rounded-circle" src="assets/img/avatar/avatar3.jpg" alt=""/>
+                                </div>
+                                <span class="weight500">Dash Don</span>
+                                <span class="small float-right text-muted">07:12 PM</span>
+
+                                <div class="dropdown-message">
+                                    Hi, This is Dash Don form usa. I'm looking for someone who really good at design and frontend like mosaddek
+                                </div>
+                            </a>
+
+                            <a class="dropdown-item border-bottom" href="#">
+                                <div class="float-left notificaton-thumb">
+                                    <img class="rounded-circle" src="assets/img/avatar/avatar1.jpg" alt=""/>
+                                </div>
+                                <span class="weight500">dkmosa</span>
+                                <span class="small float-right text-muted">12:10 PM</span>
+
+                                <div class="dropdown-message">
+                                    We build a beautiful dashboard admin panel for professional
+                                </div>
+                            </a>
+                            <a class="dropdown-item small" href="#">View all messages</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle mr-lg-3" id="alertsDropdown" href="#" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="vl_bell"></i>
+                            <span class="d-lg-none">Notification
+                                <span class="badge badge-pill badge-warning">5 New</span>
+                            </span>
+                            <div class="notification-alarm">
+                                <span class="wave wave-warning"></span>
+                                <span class="dot bg-warning"></span>
+                            </div>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right header-right-dropdown-width pb-0" aria-labelledby="alertsDropdown">
+                            <h6 class="dropdown-header weight500">Notification</h6>
+
+                            <div class="dropdown-divider mb-0"></div>
+                            <a class="dropdown-item border-bottom" href="#">
+                                <span class="text-primary">
+                                <span class="weight500">
+                                    <i class="vl_bell weight600 pr-2"></i>Weekly Update</span>
+                                </span>
+                                <span class="small float-right text-muted">03:14 AM</span>
+
+                                <div class="dropdown-message f12">
+                                    This week project update report generated. All team members are requested to check the updates
+                                </div>
+                            </a>
+
+                            <a class="dropdown-item border-bottom" href="#">
+                                <span class="text-danger">
+                                <span class="weight500">
+                                    <i class="vl_Download-circle weight600 pr-2"></i>Server Error</span>
+                                </span>
+                                <span class="small float-right text-muted">10:34 AM</span>
+
+                                <div class="dropdown-message f12">
+                                    Unexpectedly server response stop. Responsible members are requested to fix it soon
+                                </div>
+                            </a>
+
+                            <a class="dropdown-item border-bottom" href="#">
+                                <span class="text-success">
+                                <span class="weight500">
+                                    <i class="vl_screen weight600 pr-2"></i>Monthly Meeting</span>
+                                </span>
+                                <span class="small float-right text-muted">12:30 AM</span>
+
+                                <div class="dropdown-message f12">
+                                    Our monthly meeting will be held on tomorrow sharp 12:30. All members are requested to attend this meeting.
+                                </div>
+                            </a>
+
+                            <a class="dropdown-item small" href="#">View all notification</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle mr-lg-3" id="userNav" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="user-thumb">
+                                <img class="rounded-circle" src="" alt=""/>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userNav">
+                            <a class="dropdown-item" href="{% url 'accounts:profile'%}">My Profile</a>
+                            <a class="dropdown-item" href="{% url 'accounts:profile_edit'%}">Account Settings</a>
+                            <a class="dropdown-item" href="{% url 'password_change' %}">Modifier le mot de passe</a>
+                            <a class="dropdown-item" href="#">Inbox <span class="badge badge-primary">3</span></a>
+                            <a class="dropdown-item" href="#">Message <span class="badge badge-success">5</span></a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'logout'%}">Déconnexion</a>
+                        </div>
+                    </li>
+                   <li class="nav-item">
+                        <a href="javascript:;" class="nav-link right_side_toggle">
+                            <i class="icon-options-vertical"> </i>
+                        </a>
+                    </li>
+                </ul>
+                <!--/header rightside links-->
+            </div>
+        </div>
+    </nav>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="box-container">
+            <div class="collapse navbar-collapse" id="navbarListResponsive">
+                <!--header nav links-->
+                <ul class="navbar-nav header-links">
+                    <li class="nav-item active">
+                        <a class="nav-link mr-lg-3" href="index.html">
+
+                        </a>
+                    </li>
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link " href="{% url 'equipement:home'%}" >
+                            Home
+                        </a>
+
+                    </li>
+                    {% if request.user.is_staff %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link " id="actionNav" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                            <div class="user-thumb">
+                                Equipement
+                              <!-- <img class="rounded-circle" src="{% static 'img/ajouter.jpg'%}" alt=""/>-->
+
+                            </div>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="actionNav">
+                            <a class="dropdown-item" href="{% url 'equipement:ajoute'%}">Ajouter Equipement</a>
+                            <a class="dropdown-item" href="{% url 'equipement:ajoutet'%}">Ajouter Type Equipement</a>
+
+
+
+                        </div>
+                    </li>
+                        <li class="nav-item dropdown">
+                        <a class="nav-link " id="actionNav" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                            <div class="user-thumb">
+                                Installation
+                              <!-- <img class="rounded-circle" src="{% static 'img/ajouter.jpg'%}" alt=""/>-->
+
+                            </div>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="actionNav">
+                            <a class="dropdown-item" href="{% url 'install:table_installation'%}"> liste equipement instaler</a>
+                        </div>
+                    </li>
+                        <li class="nav-item dropdown">
+                        <a class="nav-link " id="actionNav" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                            <div class="user-thumb">
+                                Direction
+                              <!-- <img class="rounded-circle" src="{% static 'img/ajouter.jpg'%}" alt=""/>-->
+
+                            </div>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="actionNav">
+                             <a class="dropdown-item" href="{% url 'install:ajouted'%}">ajouter Direction</a>
+                        </div>
+                    </li>
+
+                    {%endif%}
+                </ul>
+                <!--/header nav links-->
+                <!--header search-
+                <ul class="navbar-nav header-links ml-auto">
+                    <li class="nav-item">
+                        <form class="search-wrap">
+                            <input type="text"  id="myInput"class="form-control form-pill search-input" placeholder="Search"/>
+                            <i class="fa fa-search"></i>
+                        </form>
+                    </li>
+                </ul>
+                /header search-->
+            </div>
+        </div>
+    </nav>
+    <!--/header-->
+
+
+
+
+
+
+
+    <!--main content wrapper-->
+    <div class="content-wrapper">
+
+
+        <div class="box-container">
+            <div class="container-fluid">
+                 {% block content %}
+                 {% endblock %}
+
+
+
+            </div>
+        </div>
+    </div>
+    <!--/main content wrapper-->
+
+
+
+    <!--right sidebar-->
+    <div class="right-sidebar" id="right_side_bar">
+        <div class="card border-0">
+            <div class="card-body pb-0">
+                <!--close toggle-->
+                <a href="javascript:;" class="right_side_toggle float-right close-sidebar-icon">
+                    <i class=" ti-shift-right"> </i>
+                </a>
+                <!--/close toggle-->
+            </div>
+            <div class="card-body pt-2">
+
+                <div class="right-widget">
+                    <div class="custom-title-wrap bar-primary mb-4">
+                        <div class="custom-title">Today's Activity</div>
+                    </div>
+
+                    <ul class="list-unstyled base-timeline">
+                        <li class="time-dot-primary">
+                            <div class="base-timeline-info">
+                                <a href="#">John123</a> Successfully purchased item#26
+                            </div>
+                            <small class="text-muted">
+                                28 mins ago
+                            </small>
+                        </li>
+                        <li class="time-dot-danger">
+                            <div class="base-timeline-info">
+                                <a href="#" class="text-danger">Farnandez</a> placed the order for accessories
+                            </div>
+                            <small class="text-muted">
+                                2 days ago
+                            </small>
+                        </li>
+                        <li class="time-dot-purple">
+                            <div class="base-timeline-info">
+                                User <a href="#" class="text-purple">Lisa Maria</a> checked out from the market
+                            </div>
+                            <small class="text-muted">
+                                12 mins ago
+                            </small>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="right-widget">
+                    <div class="custom-title-wrap bar-danger mb-4">
+                        <div class="custom-title">Active Users</div>
+                    </div>
+
+                    <ul class="list-unstyled mb-0 list-widget">
+                        <li class="cursor">
+                            <div class="media mb-4">
+                                <div class="st-alphabet mr-3">
+                                    <img class="rounded-circle" src="assets/img/avatar/avatar1.jpg" alt=" ">
+                                    <span class="status bg-success"></span>
+                                </div>
+                                <div class="media-body ">
+                                    <div class="float-left">
+                                        <h6 class="text-uppercase mb-0">shirley hoe</h6>
+                                        <span class="text-muted">Online</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="cursor">
+                            <div class="media mb-4">
+                                <div class="st-alphabet mr-3">
+                                    <img class="rounded-circle" src="assets/img/avatar/avatar2.jpg" alt=" ">
+                                    <span class="status bg-warning"></span>
+                                </div>
+                                <div class="media-body ">
+                                    <div class="float-left">
+                                        <h6 class="text-uppercase mb-0">james alexender</h6>
+                                        <span class="text-muted">Screaming...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="cursor">
+                            <div class="media mb-4">
+                                <div class="st-alphabet mr-3">
+                                    <img class="rounded-circle" src="assets/img/avatar/avatar3.jpg" alt=" ">
+                                    <span class="status bg-info"></span>
+                                </div>
+                                <div class="media-body">
+                                    <div class="float-left">
+                                        <h6 class="text-uppercase mb-0">ursula sitorus</h6>
+                                        <span class="text-muted">Start Exploring</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="cursor">
+                            <div class="media mb-3">
+                                <div class="st-alphabet mr-3">
+                                    <img class="rounded-circle" src="assets/img/avatar/avatar4.jpg" alt=" ">
+                                    <span class="status bg-danger"></span>
+                                </div>
+                                <div class="media-body">
+                                    <div class="float-left">
+                                        <h6 class="text-uppercase mb-0">jonna pinedda</h6>
+                                        <span class="text-muted">Busy</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="right-widget">
+
+                    <div class="custom-title-wrap bar-success mb-4">
+                        <div class="custom-title">Notification</div>
+                    </div>
+
+                    <div >
+                        <div class="dropdown-divider mb-0"></div>
+                        <a class="nav-link border-bottom px-0 py-3" href="#">
+                            <span class="text-primary">
+                            <span class="weight700 f12">
+                                <i class="vl_bell weight600 pr-2"></i>Weekly Update</span>
+                            </span>
+                            <span class="small float-right text-muted">03:14 AM</span>
+
+                            <div class="text-dark f12">
+                                This week project update report generated. All team members are requested to check the updates
+                            </div>
+                        </a>
+
+                        <a class="nav-link border-bottom px-0 py-3" href="#">
+                            <span class="text-danger">
+                            <span class="weight700 f12">
+                                <i class="vl_Download-circle weight600 pr-2"></i>Server Error</span>
+                            </span>
+                            <span class="small float-right text-muted">10:34 AM</span>
+
+                            <div class="text-dark f12">
+                                Unexpectedly server response stop. Responsible members are requested to fix it soon
+                            </div>
+                        </a>
+
+                        <a class="nav-link border-bottom px-0 py-3" href="#">
+                            <span class="text-success">
+                            <span class="weight700 f12">
+                                <i class="vl_screen weight600 pr-2"></i>Monthly Meeting</span>
+                            </span>
+                            <span class="small float-right text-muted">12:30 AM</span>
+
+                            <div class="text-dark f12">
+                                Our monthly meeting will be held on tomorrow sharp 12:30. All members are requested to attend this meeting.
+                            </div>
+                        </a>
+
+                        <div class="text-center mt-3">
+                            <a class="nav-link px-0" href="#">View all notification</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--/right sidebar-->
+
+       <!--basic scripts-->
+    <script src="{% static 'vendor/jquery/jquery.min.js'%}"></script>
+    <script src="{% static 'vendor/jquery-ui/jquery-ui.min.js'%}"></script>
+    <script src="{% static 'vendor/popper.min.js'%}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js'%}"></script>
+
+    <script src="{% static 'vendor/jquery-dropdown-master/jquery.dropdown.js'%}"></script>
+
+    <script src="{% static 'vendor/m-custom-scrollbar/jquery.mCustomScrollbar.concat.min.js'%}"></script>
+
+    <!--sparkline-->
+    <script src="{% static 'vendor/sparkline/jquery.sparkline.js'%}"></script>
+    <!--sparkline initialization-->
+    <script src="{% static 'vendor/js-init/sparkline/init-sparkline.js'%}"></script>
+
+    <!--c3chart-->
+    <script src="{% static 'vendor/c3chart/d3.min.js'%}"></script>
+    <script src="{% static 'vendor/c3chart/c3.min.js'%}"></script>
+    <!--c3chart initialization-->
+    <script src="{% static 'vendor/js-init/c3chart/init-c3chart.js'%}"></script>
+
+    <!--chartjs-->
+    <script src="{% static 'vendor/chartjs/Chart.bundle.min.js'%}"></script>
+    <!--chartjs initialization-->
+    <script src="{% static 'vendor/js-init/chartjs/init-creative-state-chart.js'%}"></script>
+    <script src="{% static 'vendor/js-init/chartjs/init-area-chart.js'%}"></script>
+    <script src="{% static 'vendor/js-init/chartjs/init-line-chart.js'%}"></script>
+    <script src="{% static 'vendor/js-init/chartjs/init-doughnut-chart.js'%}"></script>
+    <script src="{% static 'vendor/js-init/chartjs/init-doughnut-chart2.js'%}"></script>
+    <script src="{% static 'vendor/js-init/chartjs/init-sales-report-chart.js'%}"></script>
+    <script src="{% static 'vendor/js-init/chartjs/init-bubble-chart.js'%}"></script>
+
+    <!--flot chart-->
+    <script src="{% static 'vendor/flot/jquery.flot.min.js'%}"></script>
+    <script src="{% static 'vendor/flot/jquery.flot.pie.min.js'%}"></script>
+    <script src="{% static 'vendor/flot/jquery.flot.tooltip.min.js'%}"></script>
+    <!--flot chart initialization-->
+    <script src="{% static 'vendor/js-init/flot/init-flot-widget.js'%}"></script>
+
+    <!--vectormap-->
+    <script src="{% static 'vendor/vector-map/jquery-jvectormap-1.2.2.min.js'%}"></script>
+    <script src="{% static 'vendor/vector-map/jquery-jvectormap-world-mill-en.js'%}"></script>
+    <!--vectormap initialization-->
+    <script src="{% static 'vendor/js-init/vmap/init-vmap-world.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="{% static 'vendor/modernizr.js"></script>
+    <![endif]-->
+
+    <!--basic scripts initialization-->
+    <script src="{% static 'js/scripts.js'%}"></script>
+
+</body>
+</html>

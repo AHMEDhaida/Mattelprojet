@@ -1,0 +1,29 @@
+ {% extends "base_generic.html" %}
+{% load bootstrap %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="col-xl-6" style="margin-left: 180px">
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header border-0">
+                            <div class="custom-title-wrap bar-primary">
+                                <div class="custom-title">Modifier equipement</div>
+                            </div>
+                        </div>
+		<div class="card card-body">
+
+			<form action="" method="POST">
+				{% csrf_token %}
+				{{ form|bootstrap }}
+				
+				<input type="submit" class="btn btn-purple float-right" value="Modifier" name="Valider">
+			</form>
+
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

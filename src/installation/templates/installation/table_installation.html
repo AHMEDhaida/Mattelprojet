@@ -1,0 +1,121 @@
+{% extends 'base_generic.html'%}
+
+% load bootstrap4 %}
+{% load static %}
+{% block content %}
+
+
+           <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card card-shadow mb-4 ">
+                            <div class="card-header border-0">
+                                <div class="custom-title-wrap bar-warning">
+                                    <div class="custom-title">List des Equipement Installer</div>
+                                    <div class=" widget-action-link">
+                                        <div class="row">
+
+                                        </div>
+
+                                    </div>
+
+                            {% if messages %}
+                                {% for message in messages %}
+                                 <div class="alert alert-{{message.tags}}">
+                                    {{message}}
+                                 </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="card-body- pt-3 pb-4">
+                            <div class="table-responsive">
+                                <table id="data_table" class="table table-bordered table-striped" cellspacing="0">
+
+                                    <thead>
+
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Num serie </th>
+                                        <th>Nom  </th>
+                                        <th>Categorie </th>
+                                        <th>Ip</th>
+                                        <th>Mac adresse</th>
+                                        <th>Direction</th>
+                                         <th>Date d'installation</th>
+                                        <th>Installer par</th>
+                                        <th>Etat service</th>
+
+
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Num serie </th>
+                                        <th>Nom  </th>
+                                        <th>Categorie </th>
+                                        <th>Ip</th>
+                                        <th>Mac</th>
+                                        <th>Direction</th>
+                                        <th>Date d'installation</th>
+                                        <th>Installer par</th>
+                                        <th>Etat service</th>
+
+                                        <th>Action</th>
+                                    </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    {% for  list in list_installation  %}
+                                    <tr>
+                                        <td>{{ list.id }}</td>
+                                        <td>{{ list.equipement_installe}}</td>
+                                        <td>{{ list.equipement_installe.nom}}  </td>
+                                        <td>{{ list.equipement_installe.category}} </td>
+                                        <td>{{ list.ip }}</td>
+                                        <td>{{ list.mac }}</td>
+                                         <td>{{ list.Nom_direction }}</td>
+                                        <td>{{ list.date_installe|date:'d M o' }}</td>
+
+                                        <td>{{ list.author}}</td>
+                                        <td>
+                                           {{ list.service}}
+
+                                        </td>
+                                         <td>    <a class="text-dark btn btn-outline-primary p-2 btn-md" href="{% url 'install:update_installation' list.id %}"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                                 <a class="text-dark btn btn-outline-info p-2" href="{% url 'install:detail_installation' list.id %}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+
+                                         </td>
+                                    </tr>
+                                 {% endfor %}
+
+                                     </tbody>
+
+                                </table>
+                                {%if list_installation.has_other_pages%}
+
+                                              <div class="container" >
+                                                  <ul class="pagination" style="margin-left: 400px">
+                                                    {%if list_installation.has_previous%}
+                                                      <li class="page-item"><a class="page-link" href="?page={{object_E.previous_page_number}}"><i class="ti-angle-left"></i></a></li>
+                                                    {%endif%}
+
+                                                    {%for i in list_installation.paginator.page_range %}
+                                                       <li class="page-item"><a class="page-link"href="?page={{i}}"><span>{{i}}</span></a></li>
+                                                     {%endfor%}
+                                                    {%if list_installation.has_next%}
+                                                      <li class="page-item"><a class="page-link" href="?page={{object_E.next_page_number}}"><i class="ti-angle-right"></i></a></li>
+                                                    {%endif%}
+                                                  </ul>
+                                              </div>
+
+                                    {%endif%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+ </div>
+
+
+{% endblock %}

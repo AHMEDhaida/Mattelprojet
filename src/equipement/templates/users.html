@@ -1,0 +1,117 @@
+{% extends "base_generic.html" %}
+{% load bootstrap4 %}
+{% load static %}
+
+
+
+{% block content %}
+
+
+ <!--employee data table-->
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card card-shadow mb-4 ">
+                            <div class="card-header border-0">
+                                <div class="custom-title-wrap bar-warning">
+                                    <div class="custom-title">Employee Data Table</div>
+                                    <div class=" widget-action-link">
+                                      {% if request.user.is_staff %}
+
+                                        <div class="dropdown">
+                                            <a href="#" class="btn btn-transparent text-secondary dropdown-hover p-0" data-toggle="dropdown">
+                                                Action <i class="fa fa-caret-down pl-2"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right vl-dropdown">
+                                                 <a class="dropdown-item" href="{% url 'accounts:signup'%}">Ajout de utilisateur</a>
+
+                                            </div>
+                                        </div>
+                                         {%endif%}
+
+                                    </div>
+                                </div>
+                                 {% if messages %}
+                                {% for message in messages %}
+                                 <div class="alert alert-{{message.tags}}">
+                                    {{message}}
+                                 </div>
+                                {% endfor %}
+                            {% endif %}
+                            </div>
+                             {% if request.user.is_staff %}
+                        <ul type="none" class="object-tools">
+                              <li>
+
+                                <a href="{% url 'accounts:signup' %} " title="Ajouter utilisateur"  class="addlink btn btn-primary p-1">
+                                    Ajout de utilisateur <strong>+</strong>
+                                </a>
+                              </li>
+                       </ul>
+                                {% endif %}
+
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-custom">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Nom d’utilisateur</th>
+                                            <th scope="col">Adresse électronique</th>
+                                            <th scope="col">Prénom</th>
+                                            <th scope="col">Nom</th>
+                                             <th style="text-align:center;" colspan="3">Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                         {% for p in user %}
+                                        <tr>
+                                            </td>
+                                            <td>{{p.username}}</td>
+                                            <td>{{p.email}}</td>
+                                            <td>{{p.first_name}}</td>
+                                            <td>{{p.last_name}}</td>
+
+                                            <td>
+                                                <a class="text-dark btn btn-outline-info p-2" href="{% url 'equip:detail_user' p.id %}" title="View user">
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                </a>
+                                                <a class="text-dark btn btn-outline-primary p-2 btn-md" href="{% url 'accounts:roleuser' p.id %}" title="role de user">
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                </a>
+                                                <a class="btn btn-outline-danger p-2 btn-md " href="{% url 'equip:delete_user' p.id %}" title="Supprimer user" >
+                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                </a>
+
+
+                                            </td>
+
+                                        </tr>
+
+                                        {%endfor%}
+                                        </tbody>
+                                    </table>
+                                    {%if user.has_other_pages%}
+
+                                              <div class="container" >
+                                                  <ul class="pagination" style="margin-left: 500px">
+                                                    {%if user.has_previous%}
+                                                      <li class="page-item"><a class="page-link" href="?page={{object_E.previous_page_number}}"><i class="ti-angle-left"></i></a></li>
+                                                    {%endif%}
+
+                                                    {%for i in user.paginator.page_range %}
+                                                       <li class="page-item"><a class="page-link"href="?page={{i}}"><span>{{i}}</span></a></li>
+                                                     {%endfor%}
+                                                    {%if user.has_next%}
+                                                      <li class="page-item"><a class="page-link" href="?page={{object_E.next_page_number}}"><i class="ti-angle-right"></i></a></li>
+                                                    {%endif%}
+                                                  </ul>
+                                              </div>
+
+                                    {%endif%}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base_generic.html" %}
+{% load bootstrap %}
+{% load static %}
+
+
+{% block content %}
+			<main class="content" style="margin-left: 50px">
+				<div class="container-fluid p-0">
+
+				<!--	<h1 class="h3 mb-3">Profile</h1> --->
+
+					<div class="row">
+						<div class="col-md-6 col-xl-6">
+							<div class="card mb-3">
+								<div class="card-header">
+									<h5 class="card-title mb-0">Profile Details</h5>
+								</div>
+								<div class="card-body text-center">
+
+									<img src= "{{request.user.profile.image.url}}"  alt='{{profile}}' class="img-fluid rounded-circle mb-2" width="128" height="128" />
+									<h5 class="card-title mb-0">{{request.user.username}}</h5>
+             								<hr class="my-0" />
+</br>
+									<div>
+										<h5 class="btn btn-primary btn-sm" href="#">{{request.user.profile.phone_number}}</h5>
+										<h5 class="btn btn-primary btn-sm" href="#">{{request.user.email}}</h5>
+									</div>
+								</div>
+
+								<hr class="my-0" />
+
+
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</main>
+{% endblock %}

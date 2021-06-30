@@ -1,0 +1,117 @@
+
+{% extends 'base_generic.html'%}
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+
+
+    <div class="content-wrapper">
+
+        <div class="container-fluid">
+
+
+
+            <div class="row">
+                <div class="col-xl-9">
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header border-0">
+                            <div class="custom-title-wrap bar-primary">
+                                <div class="custom-title">
+
+                                     <button class="btn  btn-success p-1 btn-md"></button>
+                                     Installation<br>
+                                    Etat service: {{detail_installation.service}}
+                                </div>
+
+
+
+                            </div>
+                               <div >
+
+
+                                </div>
+                        </div>
+
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                  <ul>
+                                      <li> Ip: {{detail_installation.ip}} </li>
+                                      <li>Adesse mac: {{detail_installation.mac}}   </li>
+                                      <li>  Atribué au direction: {{detail_installation.Nom_direction}}</li>
+                                       <li>  Installer par: {{detail_installation.author}}</li>
+                                        <li>  Date d'installation: {{detail_installation.date_installe|date:'d M o'}}</li>
+
+                                  </ul>
+
+                                      {% if request.user.is_staff %}
+
+                                             <ul type="none" class="modal-footer">
+                                              <li>
+
+                                                <a href="{% url 'installation:delete_installation' detail_installation.id %}"
+                                                  title="Desinstaller un equipement" class="addlink btn btn-danger p-2 mt-5">
+                                                   Desinstaller
+                                                </a>
+                                              </li>
+
+                                                 <li>
+
+                                                <a href="{% url 'installation:table_installation' %}"
+                                                  title="Desinstaller un equipement" class="addlink btn btn-secondary p-2 mt-5">
+                                                   Annuler
+                                                </a>
+                                              </li>
+                                             </ul>
+                                      {% endif %}
+
+
+
+                                    <!-- Modal -->
+
+                                </div>
+
+                                <div class="col-md-4 mb-6">
+                            <ul>
+                                 <li> Nom equipement: {{detail_installation.equipement_installe.nom}} </li>
+                                <li> Numero serie: {{detail_installation.equipement_installe}} </li>
+                                <li> Category: {{detail_installation.equipement_installe.category}} </li>
+                                <li> Ajouter par: {{detail_installation.equipement_installe.author}} </li>
+                                <li> Ajouter par: {{detail_installation.equipement_installe.date_ajoute|date:'d M o'}}</li>
+
+
+
+                            </ul>
+
+                                    <!-- Modal -->
+
+
+                                </div>
+
+
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+    <!--/main content wrapper-->
+
+
+
+{% endblock  %}
+

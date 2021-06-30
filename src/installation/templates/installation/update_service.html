@@ -1,0 +1,74 @@
+{% extends 'base_generic.html'%}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<div class="container">
+
+  <!-- Trigger the modal with a button -->
+<!--  <button type="button" class="btn btn-info p-2 btn-md" data-toggle="modal" data-target="#myModal" title="Ajouter Equipement">+</button>-->
+
+  <!-- Modal -->
+<!--  <div class="modal fade" id="myModal" role="dialog">-->
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" >Mise a jour cet equipement qui est "{{installation.service}}"  </h4>
+
+            <button type="button" class="close" data-dismiss="modal">
+<!--                install:detail_installation' installation.id -->
+
+            </button>
+
+
+        </div>
+        <div class="modal-body">
+               {% if messages %}
+                 {% for message in messages %}
+                     <div class="alert alert-{{message.tags}}">
+                        {{message}}
+                     </div>
+                 {% endfor %}
+               {% endif %}
+
+          <table>
+              <tr>
+                  <td>
+                           <li> Nom equipement: {{installation.equipement_installe.nom}} </li>
+                                <li> Numero serie: {{installation.equipement_installe}} </li>
+                                <li> Categorie: {{installation.equipement_installe.category}} </li>
+                                <li> Ajouter par: {{installation.equipement_installe.author}} </li>
+                                <li> Date ajoute: {{installation.equipement_installe.date_ajoute|date:'d M o'}}</li>
+
+                  </td>
+                  <td></td><td></td> <td></td><td></td>
+                  <td>
+                          <li> Ip: {{installation.ip}} </li>
+                                      <li>Adesse mac: {{installation.mac}}   </li>
+                                      <li>  Atribué au direction: {{installation.Nom_direction}}</li>
+                                       <li>  Installer par: {{installation.author}}</li>
+                                        <li>  Date d'installation: {{installation.date_installe|date:'d M o'}}</li>
+                  </td>
+              </tr>
+          </table>
+        <br><br>
+          <!--    form      -->
+      <form method="POST" >
+           {% csrf_token %}
+           {{form|crispy}}
+
+
+        <div class="modal-footer">
+              <button type="submit" class="btn btn-purple float-right p-2 pl-4 pr-4">Enregistrer</button>
+                    <a href="{% url 'equip:listE' %}" type="reset" class="btn btn-secondary p-2">Annuler</a>
+
+
+        </div>
+         </form>
+
+          <!--   endform         -->
+      </div>
+    </div>
+<!--  </div>-->
+</div>
+
+{%  endblock  %}

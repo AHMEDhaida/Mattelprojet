@@ -1,0 +1,74 @@
+{% extends 'base_generic.html'%}
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+
+
+    <div class="content-wrapper">
+
+        <div class="container-fluid">
+
+
+
+            <div class="row">
+                <div class="col-xl-9">
+                    <div class="card card-shadow mb-2">
+                        <div class="card-header border-0">
+                            <div class="custom-title-wrap bar-primary">
+                                <div class="modal-header">
+                                  <div class="custom-title">
+                                                View user
+                                 </div>
+
+                                 <button type="button" class="close" data-dismiss="modal">
+                                       <a href="{% url 'equip:listU' %}" >&times;</a>
+                                 </button>
+
+
+                                 </div>
+
+                            </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                       <ul>
+                                             <li>Image:  <img class="rounded-circle" style="width:70px" src="{{profile.image.url}}" alt=""/></li>
+                                             <li>Phone number : {{profile.phone_number}}</li>
+                                             <li>Nom d’utilisateur: {{user.username}}</li>
+                                             <li>Adresse électronique: {{user.email}}</li>
+                                             <li>Prénom: {{user.first_name}}</li>
+            <li>Nom: {{user.last_name}}</li>
+
+                                       </ul>
+
+
+
+
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <!--footer-->
+
+
+        <!--/footer-->
+    </div>
+    <!--/main content wrapper-->
+    </div>
+
+
+{% endblock  %}
+
+<!--        -->
+
